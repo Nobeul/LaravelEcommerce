@@ -12,7 +12,7 @@
           @include('admin.partials.messages')
           <table class="table table-hover table-striped">
             <tr>
-              <th>#</th>
+              <th>SL</th>
               <th>Category Title</th>
               <th>Parent Category</th>
               <th>Category Image</th>
@@ -22,7 +22,7 @@
 
             @foreach ($categories as $category)
               <tr>
-                <td>#</td>
+                <td>{{ $category->id }}</td>
                 <td>{{ $category->name }}</td>
                 <td>
                   @if($category->parent_id == NULL)

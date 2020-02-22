@@ -27,8 +27,13 @@
 		
 
 
-	<script src="{{asset('css/js/jquery-3.2.1.slim.min.js')}}"></script>
 	<script src="{{asset('css/js/popper.min.js')}}"></script>
 	<script src="{{asset('css/js/bootstrap.min.js')}}"></script>
+	<script src="{{asset('css/js/jquery-3.2.1.slim.min.js')}}"></script>
+	<script src="{{asset('css/js/jqueryValidationPlugin.jss')}}"></script>
+	<script src="js/form-validation.js"></script>
+
+
+	
 </body>
 </html>
