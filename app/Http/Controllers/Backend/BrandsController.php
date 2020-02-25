@@ -38,19 +38,28 @@ class brandsController extends Controller
     	$brand->name = $request->name;
     	$brand->description = $request->description;
     	
-    	$brand->save();
-
-
-    	if ($request->hasFile('image')) {
-          //insert that image
-          $image = $request->file('image');
-          $img = time() . '.'. $image->getClientOriginalExtension();
-          $location = public_path('images/brands/' .$img);
-          Image::make($image)->save($location);
+		if ($request->hasFile('image')) {
+		$imageName = time().'.'.$request->image->extension();  
+        //store file to the public / given path
+        $brand->image = $request->image->move(public_path('images/brands/'), $imageName);
+        //store with only file name to retrieve with the name only.
+        $brand->image = $imageName;
         
-          $brand->image = $img;
-          $brand->save();
-      }
+		$brand->save();
+		}
+
+		
+
+    // 	if ($request->hasFile('image')) {
+    //       //insert that image
+    //       $image = $request->file('image');
+    //       $img = time() . '.'. $image->getClientOriginalExtension();
+    //       $location = public_path('images/brands/' .$img);
+    //       Image::make($image)->save($location);
+        
+    //       $brand->image = $img;
+    //       $brand->save();
+	//   }
     	
     	session()->flash('success', 'A new brand has been added successfully');
     	return redirect()->route('admin.brands');
@@ -85,23 +94,33 @@ class brandsController extends Controller
     	$brand = Brand::find($id);
     	$brand->name = $request->name;
     	$brand->description = $request->description;
-    	$brand->save();
+    	// $brand->save();
 
-
-    	if ($request->hasFile('image')) {
-          
-    	  if (File::exists('images/brands/'.$brand->image)) {
-    	  	File::delete('images/brands/'.$brand->image);
-    	  }
-          //insert that image
-          $image = $request->file('image');
-          $img = time() . '.'. $image->getClientOriginalExtension();
-          $location = public_path('images/brands/' .$img);
-          Image::make($image)->save($location);
+		$imageName = time().'.'.$request->image->extension();  
+        //store file to the public / given path
+        $brand->image = $request->image->move(public_path('images/brands/'), $imageName);
+        //store with only file name to retrieve with the name only.
+        $brand->image = $imageName;
         
-          $brand->image = $img;
-          $brand->save();
-      }
+        $brand->save();
+
+    // 	if ($request->hasFile('image')) {
+          
+    // 	  if (File::exists('images/brands/'.$brand->image)) {
+    // 	  	File::delete('images/brands/'.$brand->image);
+    // 	  }
+    //       //insert that image
+    //     //   $image = $request->file('image');
+    //     //   $img = time() . '.'. $image->getClientOriginalExtension();
+    //     //   $location = public_path('images/brands/' .$img);
+    //     //   Image::make($image)->save($location);
+        
+    //     //   $brand->image = $img;
+	// 	//   $brand->save();
+		
+		
+
+    //   }
     	
     	session()->flash('success', 'brand has been updated successfully');
     	return redirect()->route('admin.brands');

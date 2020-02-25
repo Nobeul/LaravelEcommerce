@@ -70,14 +70,20 @@ class ProductsController extends Controller
             foreach ($request->product_image as $image) {
                 //insert that image
                 //$image = $request->file('product_image');
-                $img = time() . '.'. $image->getClientOriginalExtension();
-                $location = public_path('images/products/' .$img);
-                Image::make($image)->save($location);
+                        // $img = time() . '.'. $image->getClientOriginalExtension();
+                        // $location = public_path('images/products/' .$img);
+                        // Image::make($image)->save($location);
+            $imageName = time().'.'.$request->image->extension(); 
+            $product->image = $request->image->move(public_path('images/brands/'), $imageName);
+
+             
+
+                
                 $product_image = new ProductImage;
                 $product_image->product_id = $product->id;
                 $product->category_id = $request->category_id;
                 $product->brand_id = $request->brand_id;
-                $product_image->image = $img;
+                $product_image->image = $imageName;
                 $product_image->save();
             }
         }
