@@ -33,3 +33,9 @@
 .child-rows a.list-group-item{
 	border-left: 0px!important;
 }
+
+
+form .error {
+  margin-top: 5px;
+  color: #ff0000;
+} 
